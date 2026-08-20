@@ -14,8 +14,7 @@ const inter = Inter({
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["opsz"],
-  style: ["normal", "italic"],
+  axes: ["opsz", "WONK"],
 });
 
 export const metadata: Metadata = {

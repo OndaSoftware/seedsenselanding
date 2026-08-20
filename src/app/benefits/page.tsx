@@ -1,204 +1,213 @@
+import Image from "next/image";
 import type { Metadata } from "next";
-import type { IconType } from "react-icons";
-import {
-  FaBolt,
-  FaChartLine,
-  FaDatabase,
-  FaRocket,
-  FaShareAlt,
-  FaTasks,
-  FaUsers,
-} from "react-icons/fa";
+import { FaChartBar, FaEnvelopeOpenText, FaSeedling } from "react-icons/fa";
+import BrowserFrame from "@/components/BrowserFrame";
 import ContactCta from "@/components/ContactCta";
+import StakeholderSection, {
+  PhoneFrame,
+  PhotoFrame,
+} from "@/components/benefits/StakeholderSection";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Why SeedSense? - SeedSense",
   description:
-    "Explore how SeedSense benefits your team and improves trial management efficiency.",
+    "See how SeedSense helps product developers, partner companies and growers, and sales managers run better seed trials.",
 };
 
-interface Benefit {
-  icon: IconType;
-  title: string;
-  text: string;
-  items: string[];
-}
-
-const benefits: Benefit[] = [
+const roles = [
   {
-    icon: FaDatabase,
-    title: "Centralized Trial Data",
-    text: "Stop relying on disconnected tools like spreadsheets. All your trial data lives in one easy-to-access platform.",
-    items: [
-      "Eliminate errors from manual data entry",
-      "Consistent, reliable data for every trial",
-      "Free your team to focus on results",
-    ],
+    href: "#product-developers",
+    icon: FaSeedling,
+    number: "01",
+    title: "Product Developers",
+    text: "Capture trials in the field, then share them across the company.",
   },
   {
-    icon: FaTasks,
-    title: "Streamlined Task Management",
-    text: "Keep your team organized and give managers full visibility into the progress of every trial.",
-    items: [
-      "Assign and track tasks in real time",
-      "Stay ahead with overdue alerts",
-      "Clear activity log for accountability",
-    ],
+    href: "#partners-growers",
+    icon: FaEnvelopeOpenText,
+    number: "02",
+    title: "Partners & Growers",
+    text: "Receive trial maps and evaluation reports automatically.",
   },
   {
-    icon: FaBolt,
-    title: "Real-Time Data Access",
-    text: "Make faster decisions by giving your team immediate access to trial data as soon as it's available.",
-    items: [
-      "Access from anywhere, any device",
-      "Everyone sees the latest information",
-      "Respond quickly to changes",
-    ],
+    href: "#sales-managers",
+    icon: FaChartBar,
+    number: "03",
+    title: "Sales Managers",
+    text: "See which varieties work — and compare what to sell next.",
   },
-  {
-    icon: FaShareAlt,
-    title: "Effortless Data Sharing",
-    text: "Share trial results with farmers, suppliers, and stakeholders quickly and securely.",
-    items: [
-      "Export in formats tailored to your needs",
-      "Set permissions to protect data privacy",
-      "Better collaboration across teams",
-    ],
-  },
-  {
-    icon: FaChartLine,
-    title: "Better Decision-Making",
-    text: "Make smarter business decisions with insights generated from comprehensive trial data.",
-    items: [
-      "Identify trends with analytics tools",
-      "Plan ahead with detailed reports",
-      "Empower your team to act confidently",
-    ],
-  },
-  {
-    icon: FaRocket,
-    title: "Improved Efficiency",
-    text: "Reduce time spent on admin tasks and focus on what matters most — your trials and results.",
-    items: [
-      "Automate repetitive tasks",
-      "Simplified, user-friendly workflows",
-      "Boost productivity organization-wide",
-    ],
-  },
-];
-
-const featuredBenefit: Benefit = {
-  icon: FaUsers,
-  title: "Stronger Collaboration",
-  text: "Ensure everyone is on the same page with synchronized data and intuitive communication tools.",
-  items: [
-    "Integrates with existing systems",
-    "Real-time communication across teams",
-    "Unified approach to achieving goals",
-  ],
-};
-
-function BenefitIcon({ icon: Icon }: { icon: IconType }) {
-  return (
-    <div className="mb-6 flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-xl bg-primary/8">
-      <Icon aria-hidden className="text-base text-primary" />
-    </div>
-  );
-}
-
-function BenefitList({ items, bordered }: { items: string[]; bordered?: boolean }) {
-  return (
-    <ul className={bordered ? "border-t border-sage/35 pt-4" : ""}>
-      {items.map((item) => (
-        <li
-          key={item}
-          className="flex items-center gap-2.5 py-[0.45rem] text-[0.875rem] text-moss before:inline-block before:h-[5px] before:w-[5px] before:shrink-0 before:rounded-full before:bg-accent before:content-['']"
-        >
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-}
+] as const;
 
 export default function BenefitsPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden bg-cream px-6 pt-24 pb-16 text-center sm:min-h-[55vh] sm:px-8 sm:pt-32 sm:pb-20">
+      <section className="relative flex min-h-[48vh] items-center justify-center overflow-hidden bg-cream px-6 pt-24 pb-16 text-center sm:min-h-[52vh] sm:px-8 sm:pt-32 sm:pb-20">
         <div
           aria-hidden
           className="pointer-events-none absolute top-[35%] left-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse,rgba(40,89,59,0.07)_0%,transparent_65%)]"
         />
-        <div className="relative z-10 max-w-[720px]">
+        <div className="relative z-10 max-w-[760px]">
           <div className="mb-8 inline-flex items-center gap-3 text-[0.68rem] font-bold tracking-[0.24em] text-primary uppercase before:inline-block before:h-px before:w-7 before:bg-primary/40 before:content-[''] after:inline-block after:h-px after:w-7 after:bg-primary/40 after:content-['']">
             Why SeedSense
           </div>
-          <h1 className="mb-6 font-serif text-[clamp(3rem,7vw,5.5rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-ink">
-            Built for the way
+          <h1 className="heading-display mb-6 text-ink">
+            Built for everyone
             <br />
-            you work the field.
+            in the trial.
           </h1>
-          <p className="mx-auto max-w-[520px] text-[clamp(1rem,2vw,1.18rem)] leading-[1.75] font-light text-fern">
-            From centralized data to real-time collaboration, SeedSense gives
-            your team every advantage — in the office and out in the field.
+          <p className="mx-auto max-w-[560px] text-[clamp(1rem,2vw,1.18rem)] leading-[1.75] font-light text-fern">
+            Product developers capture the data. Partners, dealers, and growers
+            receive the reports. Sales managers decide what to sell next.
           </p>
         </div>
       </section>
 
-      {/* Benefits grid */}
-      <div className="bg-white px-6 pb-32 sm:px-8">
-        <div className="px-2 pt-24 pb-8 text-center">
-          <span className="mb-4 block text-[0.68rem] font-bold tracking-[0.22em] text-primary uppercase">
-            The Advantage
-          </span>
-          <h2 className="mb-4 font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] font-semibold text-ink">
-            Everything your trials need.
-            <br />
-            Nothing they don&apos;t.
-          </h2>
-          <p className="mx-auto max-w-[520px] text-[1.04rem] leading-[1.72] text-fern">
-            Seven core capabilities that save time, reduce errors, and help
-            your team make better decisions, faster.
-          </p>
-        </div>
-
-        <Reveal>
-          <div className="mx-auto mt-16 grid max-w-[1100px] grid-cols-1 gap-px overflow-hidden rounded-[20px] border border-sage/30 bg-sage/25 sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((benefit) => (
-              <div
-                key={benefit.title}
-                className="bg-white px-9 py-11 transition-colors hover:bg-[#f9fdf9]"
+      <nav
+        aria-label="Who SeedSense is for"
+        className="border-b border-sage/35 bg-white px-6 py-12 sm:px-8"
+      >
+        <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-4 md:grid-cols-3">
+          {roles.map((role, index) => (
+            <Reveal key={role.href} delay={index as 0 | 1 | 2}>
+              <a
+                href={role.href}
+                className="group flex h-full flex-col rounded-[18px] border border-sage/30 bg-cream/60 px-7 py-8 transition-all hover:-translate-y-1 hover:border-primary/25 hover:bg-cream hover:shadow-[0_18px_40px_rgba(40,89,59,0.1)]"
               >
-                <BenefitIcon icon={benefit.icon} />
-                <h3 className="mb-3 font-serif text-[1.22rem] font-semibold text-ink">
-                  {benefit.title}
-                </h3>
-                <p className="mb-5 text-[0.95rem] leading-[1.72] text-fern">
-                  {benefit.text}
+                <span className="mb-4 flex items-center justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-mint text-primary">
+                    <role.icon aria-hidden className="text-base" />
+                  </span>
+                  <span className="font-serif text-2xl font-light text-accent/50">
+                    {role.number}
+                  </span>
+                </span>
+                <h2 className="heading-card mb-2 text-ink">{role.title}</h2>
+                <p className="text-[0.95rem] leading-[1.65] text-fern">
+                  {role.text}
                 </p>
-                <BenefitList items={benefit.items} bordered />
-              </div>
-            ))}
-          </div>
-        </Reveal>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </nav>
 
-        <Reveal>
-          <div className="mx-auto mt-px flex max-w-[1100px] flex-col items-start gap-10 rounded-[20px] border border-sage/30 bg-white px-9 py-11 transition-colors hover:bg-[#f9fdf9] md:flex-row">
-            <BenefitIcon icon={featuredBenefit.icon} />
-            <div className="grid flex-1 grid-cols-1 gap-x-12 md:grid-cols-2">
-              <h3 className="mb-3 font-serif text-[1.22rem] font-semibold text-ink md:col-span-2">
-                {featuredBenefit.title}
-              </h3>
-              <p className="text-[0.95rem] leading-[1.72] text-fern">
-                {featuredBenefit.text}
-              </p>
-              <BenefitList items={featuredBenefit.items} />
-            </div>
-          </div>
-        </Reveal>
-      </div>
+      <StakeholderSection
+        id="product-developers"
+        number="01"
+        role="Product Developers"
+        title={
+          <>
+            Capture the trial in the field.
+            <br />
+            Share it once you&apos;re back.
+          </>
+        }
+        text="Product developers log trials on a phone or tablet—online or fully offline. When the device reconnects, results sync to the cloud so the rest of the company can work from the same data."
+        benefits={[
+          {
+            title: "Input field data online or offline",
+            text: "Record locations, layouts, scores, photos, and notes in the app, even with no signal.",
+          },
+          {
+            title: "Sync once, share across the company",
+            text: "The moment you reconnect, trial data lands in the cloud for research, sales, and leadership.",
+          },
+          {
+            title: "Task management that stays visible",
+            text: "Assign thinning, monitoring, and evaluation work so nothing slips between visits.",
+          },
+        ]}
+        visual={
+          <PhotoFrame
+            src="/images/girl-farmer-tablet-field.jpg"
+            alt="Product developer entering trial data on a tablet in the field"
+            width={1800}
+            height={1201}
+            caption="Log trials on any device, then sync to the rest of the team."
+          />
+        }
+        background="white"
+      />
+
+      <StakeholderSection
+        id="partners-growers"
+        number="02"
+        role="Partners, Dealers & Growers"
+        title={
+          <>
+            Reports arrive on their own.
+            <br />
+            No chasing PDFs.
+          </>
+        }
+        text="Partner seed suppliers, dealer companies, and growers do not need to live in the app. SeedSense emails them trial maps and evaluation reports automatically, so everyone sees the same result without extra work."
+        benefits={[
+          {
+            title: "Automated trial map emails",
+            text: "Send maps to farmers, supplier reps, and dealer contacts in one step.",
+          },
+          {
+            title: "Evaluation reports, delivered",
+            text: "Scores, photos, and notes go out as professional reports—not spreadsheet dumps.",
+          },
+          {
+            title: "The right people, every time",
+            text: "Choose who receives which report so partners and growers stay in the loop without inbox noise.",
+          },
+        ]}
+        visual={
+          <PhoneFrame
+            src="/images/email.jpeg"
+            alt="SeedSense email settings for sending trial maps to farmers and supplier reps"
+            width={828}
+            height={1792}
+          />
+        }
+        reversed
+        background="cream"
+      />
+
+      <StakeholderSection
+        id="sales-managers"
+        number="03"
+        role="Sales Managers"
+        title={
+          <>
+            See what actually works.
+            <br />
+            Decide what to sell next.
+          </>
+        }
+        text="Sales managers get the payoff of every trial in one catalog. Aggregated evaluations and variety records make it obvious which lines perform—and side-by-side comparison shows what belongs in the next offering."
+        benefits={[
+          {
+            title: "Aggregation of trials, evals, and varieties",
+            text: "Every recorded trial rolls up to the variety: total trials, completed evaluations, average score, and maturity.",
+          },
+          {
+            title: "Find working varieties fast",
+            text: "Filter the catalog by crop, region, and performance instead of hunting through old spreadsheets.",
+          },
+          {
+            title: "Compare varieties before you sell",
+            text: "Put two lines next to each other—scores, maps, charts, and photos—and pick what to promote next.",
+          },
+        ]}
+        visual={
+          <BrowserFrame>
+            <Image
+              src="/images/variety-compare-overview.png"
+              alt="SeedSense web app comparing two varieties side by side with aggregated scores"
+              width={1600}
+              height={861}
+              sizes="(max-width: 1024px) 90vw, 520px"
+              className="block h-auto w-full"
+            />
+          </BrowserFrame>
+        }
+        background="white"
+      />
 
       <ContactCta />
     </>

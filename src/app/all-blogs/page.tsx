@@ -27,7 +27,7 @@ export default function AllBlogsPage() {
             Knowledge Hub
           </p>
           <div className="grid grid-cols-1 items-end gap-5 md:grid-cols-2 md:gap-12">
-            <h1 className="font-serif text-[2.4rem] leading-[1.05] font-semibold text-ink sm:text-5xl md:text-[4rem]">
+            <h1 className="heading-display text-ink">
               Insights &<br />
               Updates
             </h1>

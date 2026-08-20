@@ -22,7 +22,7 @@ describe("HomePage", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders all four feature sections", () => {
+  it("renders all five feature sections", () => {
     render(<HomePage />);
     expect(
       screen.getByRole("heading", { name: /works everywhere\..*even without signal/i }),
@@ -36,6 +36,12 @@ describe("HomePage", () => {
     expect(
       screen.getByRole("heading", { name: /from field data.*to boardroom report/i }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /find the next best variety/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByAltText(/comparing two varieties side by side/i),
+    ).toBeInTheDocument();
   });
 
   it("renders the four How It Works steps", () => {
@@ -45,13 +51,6 @@ describe("HomePage", () => {
         expect(screen.getByRole("heading", { name: step })).toBeInTheDocument();
       },
     );
-  });
-
-  it("renders the stats section", () => {
-    render(<HomePage />);
-    expect(screen.getByText("Offline Capable")).toBeInTheDocument();
-    expect(screen.getByText("Spreadsheets Needed")).toBeInTheDocument();
-    expect(screen.getByText("Platform for Everything")).toBeInTheDocument();
   });
 
   it("renders the contact section", () => {

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import BrowserFrame from "@/components/BrowserFrame";
 import ParallaxFrame from "@/components/home/ParallaxFrame";
 import Reveal from "@/components/Reveal";
 
@@ -13,9 +14,11 @@ interface ScrollFeatureProps {
   reversed?: boolean;
   background: "white" | "cream";
   parallax?: boolean;
+  /** Phone mockups stay portrait; website screenshots use a browser chrome. */
+  variant?: "phone" | "browser";
 }
 
-/** One of the alternating text + phone-screenshot sections on the homepage. */
+/** One of the alternating text + screenshot sections on the homepage. */
 export default function ScrollFeature({
   eyebrow,
   title,
@@ -25,19 +28,31 @@ export default function ScrollFeature({
   reversed = false,
   background,
   parallax = false,
+  variant = "phone",
 }: ScrollFeatureProps) {
   const bg = background === "cream" ? "bg-cream" : "bg-white";
+  const isBrowser = variant === "browser";
 
-  const frame = (
-    <div className="max-w-[200px] overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(10,26,16,0.14),0_4px_16px_rgba(10,26,16,0.07)]">
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        sizes="200px"
-        className="block w-full"
-      />
+  const screenshot = (
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      sizes={isBrowser ? "(max-width: 768px) 90vw, 42vw" : "280px"}
+      className={
+        isBrowser
+          ? "block h-auto w-full"
+          : "block h-[420px] w-auto sm:h-[480px]"
+      }
+    />
+  );
+
+  const frame = isBrowser ? (
+    <BrowserFrame>{screenshot}</BrowserFrame>
+  ) : (
+    <div className="overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(10,26,16,0.14),0_4px_16px_rgba(10,26,16,0.07)]">
+      {screenshot}
     </div>
   );
 
@@ -48,7 +63,7 @@ export default function ScrollFeature({
           <span className="mb-6 inline-flex items-center gap-2.5 text-[0.66rem] font-bold tracking-[0.22em] text-primary uppercase before:inline-block before:h-px before:w-6 before:bg-primary before:content-['']">
             {eyebrow}
           </span>
-          <h2 className="mb-5 font-serif text-[clamp(2rem,3vw,2.9rem)] leading-[1.15] font-semibold text-ink">
+          <h2 className="heading-section mb-5 text-ink">
             {title}
           </h2>
           <p className="mb-7 text-[1.04rem] leading-[1.8] text-fern">{text}</p>
@@ -64,7 +79,11 @@ export default function ScrollFeature({
           </ul>
         </Reveal>
       </div>
-      <div className={`flex items-center justify-center px-8 py-10 ${reversed ? "md:order-1" : ""}`}>
+      <div
+        className={`flex items-center justify-center px-8 py-10 ${
+          isBrowser ? "md:px-10" : ""
+        } ${reversed ? "md:order-1" : ""}`}
+      >
         <Reveal delay={1}>
           {parallax ? <ParallaxFrame>{frame}</ParallaxFrame> : frame}
         </Reveal>

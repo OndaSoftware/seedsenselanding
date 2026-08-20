@@ -31,7 +31,7 @@ export default function BlogPostLayout({ slug, children }: BlogPostLayoutProps) 
             <span className="mb-5 inline-block rounded bg-mint px-3.5 py-1.5 text-[0.68rem] font-bold tracking-[0.13em] text-primary uppercase">
               {categoryLabels[post.category]}
             </span>
-            <h1 className="mb-5 font-serif text-[1.75rem] leading-[1.12] font-semibold text-ink sm:text-[2.1rem] lg:text-[2.9rem]">
+            <h1 className="heading-section mb-5 text-ink">
               {post.title}
             </h1>
             <p className="mb-7 text-[1.12rem] leading-[1.78] text-[#4a5568]">

@@ -22,7 +22,7 @@ export default function ContactCta() {
           </span>
         </Reveal>
         <Reveal delay={1}>
-          <h2 className="mb-6 font-serif text-[clamp(2.2rem,5vw,4rem)] leading-[1.1] font-semibold text-white">
+          <h2 className="heading-section mb-6 text-white">
             Leave the spreadsheets behind.
           </h2>
         </Reveal>

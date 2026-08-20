@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import AboutPage from "@/app/about/page";
+import { site } from "@/lib/site";
 
 describe("AboutPage", () => {
   it("renders the hero headline", () => {
@@ -13,45 +14,39 @@ describe("AboutPage", () => {
     render(<AboutPage />);
     expect(
       screen.getByRole("heading", {
-        name: /making data simple and actionable for the seed industry/i,
+        name: /simplifying seed trialing for smarter business decisions/i,
       }),
     ).toBeInTheDocument();
   });
 
-  it("renders all six value pillars", () => {
-    render(<AboutPage />);
-    [
-      "Practical Innovation",
-      "Seamless Integration",
-      "Measurable Value",
-      "Precision-First",
-      "Integrity Always",
-      "Ignored Problems",
-    ].forEach((pillar) => {
-      expect(screen.getByRole("heading", { name: pillar })).toBeInTheDocument();
-    });
-  });
-
-  it("renders the team section with the industry-focused badge", () => {
+  it("renders the founders story with both backgrounds", () => {
     render(<AboutPage />);
     expect(
       screen.getByRole("heading", {
-        name: /two founders\. one overlooked industry/i,
+        name: /seed industry know-how\. software craft/i,
       }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/one founder comes from the software industry/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/product development and sales at seed companies/i),
     ).toBeInTheDocument();
     expect(screen.getByText("Industry Focused")).toBeInTheDocument();
     expect(screen.getByAltText("Onda Software Team")).toBeInTheDocument();
   });
 
-  it("renders the commitment section with a demo CTA", () => {
+  it("links to the Onda Software website", () => {
+    render(<AboutPage />);
+    const ondaLinks = screen.getAllByRole("link", { name: "Onda Software" });
+    expect(ondaLinks.length).toBeGreaterThan(0);
+    ondaLinks.forEach((link) => {
+      expect(link).toHaveAttribute("href", site.ondaUrl);
+    });
+  });
+
+  it("renders the contact section", () => {
     render(<AboutPage />);
     expect(
-      screen.getByRole("heading", {
-        name: /we measure success by the results you achieve/i,
-      }),
+      screen.getByRole("heading", { name: /leave the spreadsheets behind/i }),
     ).toBeInTheDocument();
-    expect(
-      screen.getAllByRole("link", { name: "Request a Demo" }).length,
-    ).toBeGreaterThan(0);
   });
 });

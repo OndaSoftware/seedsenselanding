@@ -66,6 +66,55 @@ body {
   overflow-x: hidden;
 }
 
+/*
+ * Typographic scale — every heading on the site uses one of these four
+ * levels so page titles and section titles stay visually consistent.
+ * Color is applied per-usage (e.g. text-ink, text-white).
+ */
+@layer components {
+  /*
+   * Lock Fraunces to the text optical size (opsz 18) and turn wonk off.
+   * Auto optical sizing at hero sizes pulls the display cut — a hooked "f"
+   * and calligraphic "&" that look like a different typeface than section titles.
+   */
+  .heading-display,
+  .heading-section,
+  .heading-subsection,
+  .heading-card {
+    font-family: var(--font-serif);
+    font-optical-sizing: none;
+    font-variation-settings: "opsz" 18, "WONK" 0;
+    font-weight: 600;
+  }
+
+  /* Page titles (hero h1) */
+  .heading-display {
+    font-size: clamp(2.75rem, 2.15rem + 3vw, 4.15rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Section titles (h2) and article page titles */
+  .heading-section {
+    font-size: clamp(2rem, 1.6rem + 2vw, 2.9rem);
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+  }
+
+  /* Subsection titles (article h2, featured cards) */
+  .heading-subsection {
+    font-size: 1.7rem;
+    line-height: 1.3;
+    letter-spacing: -0.008em;
+  }
+
+  /* Card titles and article h3 */
+  .heading-card {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+}
+
 /* Scroll-reveal (shared across pages, toggled by the Reveal component) */
 .reveal {
   opacity: 0;

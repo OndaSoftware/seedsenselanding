@@ -38,12 +38,6 @@ const howItWorksSteps = [
   },
 ];
 
-const stats = [
-  { num: "100%", label: "Offline Capable" },
-  { num: "0", label: "Spreadsheets Needed" },
-  { num: "1", label: "Platform for Everything" },
-];
-
 function fadeUp(delaySeconds: number) {
   return {
     animationDelay: `${delaySeconds}s`,
@@ -68,12 +62,12 @@ export default function HomePage() {
             SeedSense by Onda Software
           </div>
           <h1
-            className="mb-7 animate-fade-up font-serif text-[clamp(3.6rem,9vw,7.2rem)] leading-none font-semibold tracking-[-0.025em] text-ink opacity-0"
+            className="heading-display mb-7 animate-fade-up text-ink opacity-0"
             style={fadeUp(0.4)}
           >
             Reinvent Your
             <br />
-            <em className="text-primary italic">Seed Trials.</em>
+            <span className="text-primary">Seed Trials.</span>
           </h1>
           <p
             className="mx-auto mb-11 max-w-[540px] animate-fade-up text-[clamp(1rem,2vw,1.22rem)] leading-[1.75] font-light text-fern opacity-0"
@@ -241,6 +235,30 @@ export default function HomePage() {
         background="cream"
         reversed
       />
+      <ScrollFeature
+        eyebrow="Variety Catalog"
+        title={
+          <>
+            Find the next best variety.
+            <br />
+            Compare with proof.
+          </>
+        }
+        text="Every trial and evaluation your team records rolls up in the web app. See which varieties actually work across sites, then compare them side by side before you decide what to sell next."
+        bullets={[
+          "Aggregated trials, evaluations, and scores per variety",
+          "Side-by-side comparison with maps, charts, and photos",
+          "A living catalog of what to promote, sell, and drop",
+        ]}
+        image={{
+          src: "/images/variety-compare-overview.png",
+          alt: "SeedSense web app comparing two varieties side by side",
+          width: 1600,
+          height: 861,
+        }}
+        background="white"
+        variant="browser"
+      />
 
       {/* How it works */}
       <section className="relative overflow-hidden bg-forest px-6 py-22 sm:py-32">
@@ -254,7 +272,7 @@ export default function HomePage() {
               <span className="mb-4 block text-[0.68rem] font-bold tracking-[0.22em] text-accent uppercase">
                 How It Works
               </span>
-              <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] leading-[1.12] font-semibold text-white">
+              <h2 className="heading-section text-white">
                 From planting to
                 <br />
                 report in four steps.
@@ -293,30 +311,6 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-b border-sage/35 bg-cream px-6 py-22">
-        <div className="mx-auto grid max-w-[860px] grid-cols-1 sm:grid-cols-3">
-          {stats.map((stat, index) => (
-            <Reveal key={stat.label} delay={index as 0 | 1 | 2} className="h-full">
-              <div
-                className={`h-full px-8 py-6 text-center ${
-                  index === stats.length - 1
-                    ? ""
-                    : "border-b border-sage/40 sm:border-r sm:border-b-0"
-                }`}
-              >
-                <span className="mb-2 block font-serif text-[3.8rem] leading-none font-semibold text-primary">
-                  {stat.num}
-                </span>
-                <span className="text-[0.82rem] font-medium tracking-wide text-fern">
-                  {stat.label}
-                </span>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </section>
 

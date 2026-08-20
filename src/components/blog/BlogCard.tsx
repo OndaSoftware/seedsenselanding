@@ -45,7 +45,7 @@ export function BlogCard({ post }: { post: PostMeta }) {
       </div>
       <div className="flex flex-1 flex-col p-7">
         <PostMetaBar post={post} />
-        <h3 className="mt-2 mb-3 font-serif text-[1.25rem] leading-[1.35] font-semibold text-ink">
+        <h3 className="heading-card mt-2 mb-3 text-ink">
           {post.title}
         </h3>
         <p className="mb-5 flex-1 text-[0.93rem] leading-[1.68] text-[#4a5568]">
@@ -88,7 +88,7 @@ export function FeaturedBlogCard({
       </div>
       <div className="flex flex-col justify-center p-8 md:p-12">
         <PostMetaBar post={post} />
-        <h2 className="mb-4 font-serif text-[1.9rem] leading-[1.25] font-semibold text-ink">
+        <h2 className="heading-subsection mb-4 text-ink">
           {post.title}
         </h2>
         <p className="mb-7 text-[0.97rem] leading-[1.72] text-[#4a5568]">{excerpt}</p>

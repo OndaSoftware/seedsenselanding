@@ -13,7 +13,7 @@ export function ArticleP({ children }: { children: ReactNode }) {
 
 export function ArticleH2({ children }: { children: ReactNode }) {
   return (
-    <h2 className="mt-10 mb-4 font-serif text-[1.65rem] font-semibold text-ink">
+    <h2 className="heading-subsection mt-10 mb-4 text-ink">
       {children}
     </h2>
   );
@@ -21,7 +21,7 @@ export function ArticleH2({ children }: { children: ReactNode }) {
 
 export function ArticleH3({ children }: { children: ReactNode }) {
   return (
-    <h3 className="mt-8 mb-4 font-serif text-[1.25rem] font-semibold text-ink">
+    <h3 className="heading-card mt-8 mb-4 text-ink">
       {children}
     </h3>
   );
