@@ -1,16 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      // Legacy redirects carried over from the old static site (_redirects).
-      { source: "/seedsense.html", destination: "/", permanent: true },
-      { source: "/features.html", destination: "/", permanent: true },
-      { source: "/index.html", destination: "/", permanent: true },
-      // Old static pages used .html extensions; preserve inbound links.
-      { source: "/:slug.html", destination: "/:slug", permanent: true },
-    ];
-  },
+  // Static HTML export so the site can be hosted on GitHub Pages
+  // (same host as seedsensesoftware.com / seedsensesoftwarev2).
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

@@ -21,8 +21,7 @@ npm run dev       # http://localhost:3000
 | Command              | Description                       |
 | -------------------- | --------------------------------- |
 | `npm run dev`        | Start the dev server              |
-| `npm run build`      | Production build (static)         |
-| `npm run start`      | Serve the production build        |
+| `npm run build`      | Static export to `out/`           |
 | `npm run lint`       | Run ESLint                        |
 | `npm test`           | Run the Jest + RTL test suite     |
 | `npm run test:watch` | Run tests in watch mode           |
@@ -40,6 +39,22 @@ npm run dev       # http://localhost:3000
 2. Create `src/app/<slug>/page.tsx` composing `BlogPostLayout` with the article primitives (`ArticleP`, `ArticleH2`, `ArticleList`, `ArticleFigure`, `ArticleVideo`, `FeatureGrid`, `ArticleCta`).
 3. It automatically appears on `/all-blogs` and in the sitemap.
 
-## Legacy redirects
+## Deploy (GitHub Pages)
 
-`next.config.ts` preserves inbound links to the old static site: `/seedsense.html` and `/features.html` redirect to `/`, and any `/<page>.html` URL redirects to `/<page>`.
+The live site at [seedsensesoftware.com](https://seedsensesoftware.com) is a static GitHub Pages site: the `seedsensesoftwarev2` repo publishes `main` from `/` with a `CNAME` of `seedsensesoftware.com`.
+
+This Next.js app is exported as static HTML (`output: "export"`) and deployed the same way, from this repo, to **https://new.seedsensesoftware.com**.
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which builds `out/` and publishes it with GitHub Actions.
+
+### Route 53
+
+In the hosted zone for `seedsensesoftware.com`, add:
+
+| Record | Type | Value |
+| ------ | ---- | ----- |
+| `new.seedsensesoftware.com` | CNAME | `ondasoftware.github.io` |
+
+After DNS resolves, GitHub will issue an HTTPS cert for the subdomain (same as the current apex). Enforce HTTPS in the repo Pages settings if it is not already on.
+
+The org is on GitHub Free, so this repository must stay **public** for Pages to serve the site (the current landing repo is public for the same reason).
